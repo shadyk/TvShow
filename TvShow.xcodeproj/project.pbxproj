@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E6AB96AD24CE072400A41714 /* TvShow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AB96A324CE072400A41714 /* TvShow.framework */; };
 		E6AB96B224CE072400A41714 /* TvShowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB96B124CE072400A41714 /* TvShowTests.swift */; };
-		E6AB96B424CE072400A41714 /* TvShow.h in Headers */ = {isa = PBXBuildFile; fileRef = E6AB96A624CE072400A41714 /* TvShow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,7 +23,6 @@
 
 /* Begin PBXFileReference section */
 		E6AB96A324CE072400A41714 /* TvShow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TvShow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6AB96A624CE072400A41714 /* TvShow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TvShow.h; sourceTree = "<group>"; };
 		E6AB96A724CE072400A41714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6AB96AC24CE072400A41714 /* TvShowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TvShowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AB96B124CE072400A41714 /* TvShowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShowTests.swift; sourceTree = "<group>"; };
@@ -71,7 +69,6 @@
 		E6AB96A524CE072400A41714 /* TvShow */ = {
 			isa = PBXGroup;
 			children = (
-				E6AB96A624CE072400A41714 /* TvShow.h */,
 				E6AB96A724CE072400A41714 /* Info.plist */,
 			);
 			path = TvShow;
@@ -93,7 +90,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6AB96B424CE072400A41714 /* TvShow.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
