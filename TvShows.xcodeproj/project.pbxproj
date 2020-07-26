@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E6AB96AD24CE072400A41714 /* TvShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AB96A324CE072400A41714 /* TvShows.framework */; };
-		E6AB96B224CE072400A41714 /* TvShowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB96B124CE072400A41714 /* TvShowTests.swift */; };
 		E6AB96BE24CE088C00A41714 /* TvShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB96BD24CE088C00A41714 /* TvShow.swift */; };
+		E6AB96C024CE110600A41714 /* RemoteShowLoaderTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB96BF24CE110600A41714 /* RemoteShowLoaderTestCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,9 +26,9 @@
 		E6AB96A324CE072400A41714 /* TvShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TvShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AB96A724CE072400A41714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6AB96AC24CE072400A41714 /* TvShowsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TvShowsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6AB96B124CE072400A41714 /* TvShowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShowTests.swift; sourceTree = "<group>"; };
 		E6AB96B324CE072400A41714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6AB96BD24CE088C00A41714 /* TvShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShow.swift; sourceTree = "<group>"; };
+		E6AB96BF24CE110600A41714 /* RemoteShowLoaderTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteShowLoaderTestCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +80,8 @@
 		E6AB96B024CE072400A41714 /* TvShowTests */ = {
 			isa = PBXGroup;
 			children = (
-				E6AB96B124CE072400A41714 /* TvShowTests.swift */,
 				E6AB96B324CE072400A41714 /* Info.plist */,
+				E6AB96BF24CE110600A41714 /* RemoteShowLoaderTestCase.swift */,
 			);
 			path = TvShowTests;
 			sourceTree = "<group>";
@@ -150,6 +150,7 @@
 					};
 					E6AB96AB24CE072400A41714 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1150;
 					};
 				};
 			};
@@ -202,7 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6AB96B224CE072400A41714 /* TvShowTests.swift in Sources */,
+				E6AB96C024CE110600A41714 /* RemoteShowLoaderTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = H989CQXPY2;
@@ -406,6 +408,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shady.TvShowTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -414,6 +417,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = H989CQXPY2;
