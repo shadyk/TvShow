@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E6AB96AD24CE072400A41714 /* TvShow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AB96A324CE072400A41714 /* TvShow.framework */; };
+		E6AB96AD24CE072400A41714 /* TvShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AB96A324CE072400A41714 /* TvShows.framework */; };
 		E6AB96B224CE072400A41714 /* TvShowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB96B124CE072400A41714 /* TvShowTests.swift */; };
+		E6AB96BE24CE088C00A41714 /* TvShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB96BD24CE088C00A41714 /* TvShow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -22,11 +23,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E6AB96A324CE072400A41714 /* TvShow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TvShow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6AB96A324CE072400A41714 /* TvShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TvShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AB96A724CE072400A41714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E6AB96AC24CE072400A41714 /* TvShowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TvShowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6AB96AC24CE072400A41714 /* TvShowsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TvShowsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AB96B124CE072400A41714 /* TvShowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShowTests.swift; sourceTree = "<group>"; };
 		E6AB96B324CE072400A41714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6AB96BD24CE088C00A41714 /* TvShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6AB96AD24CE072400A41714 /* TvShow.framework in Frameworks */,
+				E6AB96AD24CE072400A41714 /* TvShows.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,7 +53,7 @@
 		E6AB969924CE072400A41714 = {
 			isa = PBXGroup;
 			children = (
-				E6AB96A524CE072400A41714 /* TvShow */,
+				E6AB96A524CE072400A41714 /* TvShows */,
 				E6AB96B024CE072400A41714 /* TvShowTests */,
 				E6AB96A424CE072400A41714 /* Products */,
 			);
@@ -60,18 +62,19 @@
 		E6AB96A424CE072400A41714 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E6AB96A324CE072400A41714 /* TvShow.framework */,
-				E6AB96AC24CE072400A41714 /* TvShowTests.xctest */,
+				E6AB96A324CE072400A41714 /* TvShows.framework */,
+				E6AB96AC24CE072400A41714 /* TvShowsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E6AB96A524CE072400A41714 /* TvShow */ = {
+		E6AB96A524CE072400A41714 /* TvShows */ = {
 			isa = PBXGroup;
 			children = (
 				E6AB96A724CE072400A41714 /* Info.plist */,
+				E6AB96BD24CE088C00A41714 /* TvShow.swift */,
 			);
-			path = TvShow;
+			path = TvShows;
 			sourceTree = "<group>";
 		};
 		E6AB96B024CE072400A41714 /* TvShowTests */ = {
@@ -96,9 +99,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		E6AB96A224CE072400A41714 /* TvShow */ = {
+		E6AB96A224CE072400A41714 /* TvShows */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E6AB96B724CE072400A41714 /* Build configuration list for PBXNativeTarget "TvShow" */;
+			buildConfigurationList = E6AB96B724CE072400A41714 /* Build configuration list for PBXNativeTarget "TvShows" */;
 			buildPhases = (
 				E6AB969E24CE072400A41714 /* Headers */,
 				E6AB969F24CE072400A41714 /* Sources */,
@@ -109,14 +112,14 @@
 			);
 			dependencies = (
 			);
-			name = TvShow;
+			name = TvShows;
 			productName = TvShow;
-			productReference = E6AB96A324CE072400A41714 /* TvShow.framework */;
+			productReference = E6AB96A324CE072400A41714 /* TvShows.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E6AB96AB24CE072400A41714 /* TvShowTests */ = {
+		E6AB96AB24CE072400A41714 /* TvShowsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E6AB96BA24CE072400A41714 /* Build configuration list for PBXNativeTarget "TvShowTests" */;
+			buildConfigurationList = E6AB96BA24CE072400A41714 /* Build configuration list for PBXNativeTarget "TvShowsTests" */;
 			buildPhases = (
 				E6AB96A824CE072400A41714 /* Sources */,
 				E6AB96A924CE072400A41714 /* Frameworks */,
@@ -127,9 +130,9 @@
 			dependencies = (
 				E6AB96AF24CE072400A41714 /* PBXTargetDependency */,
 			);
-			name = TvShowTests;
+			name = TvShowsTests;
 			productName = TvShowTests;
-			productReference = E6AB96AC24CE072400A41714 /* TvShowTests.xctest */;
+			productReference = E6AB96AC24CE072400A41714 /* TvShowsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -143,13 +146,14 @@
 				TargetAttributes = {
 					E6AB96A224CE072400A41714 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1150;
 					};
 					E6AB96AB24CE072400A41714 = {
 						CreatedOnToolsVersion = 11.5;
 					};
 				};
 			};
-			buildConfigurationList = E6AB969D24CE072400A41714 /* Build configuration list for PBXProject "TvShow" */;
+			buildConfigurationList = E6AB969D24CE072400A41714 /* Build configuration list for PBXProject "TvShows" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -162,8 +166,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E6AB96A224CE072400A41714 /* TvShow */,
-				E6AB96AB24CE072400A41714 /* TvShowTests */,
+				E6AB96A224CE072400A41714 /* TvShows */,
+				E6AB96AB24CE072400A41714 /* TvShowsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -190,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6AB96BE24CE088C00A41714 /* TvShow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +211,7 @@
 /* Begin PBXTargetDependency section */
 		E6AB96AF24CE072400A41714 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E6AB96A224CE072400A41714 /* TvShow */;
+			target = E6AB96A224CE072400A41714 /* TvShows */;
 			targetProxy = E6AB96AE24CE072400A41714 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -334,6 +339,7 @@
 		E6AB96B824CE072400A41714 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -341,16 +347,19 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TvShow/Info.plist;
+				INFOPLIST_FILE = TvShows/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.shady.TvShow;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shady.TvShows;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -358,6 +367,7 @@
 		E6AB96B924CE072400A41714 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -365,14 +375,16 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TvShow/Info.plist;
+				INFOPLIST_FILE = TvShows/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.shady.TvShow;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shady.TvShows;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -382,6 +394,7 @@
 		E6AB96BB24CE072400A41714 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = H989CQXPY2;
@@ -400,6 +413,7 @@
 		E6AB96BC24CE072400A41714 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = H989CQXPY2;
@@ -418,7 +432,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E6AB969D24CE072400A41714 /* Build configuration list for PBXProject "TvShow" */ = {
+		E6AB969D24CE072400A41714 /* Build configuration list for PBXProject "TvShows" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6AB96B524CE072400A41714 /* Debug */,
@@ -427,7 +441,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E6AB96B724CE072400A41714 /* Build configuration list for PBXNativeTarget "TvShow" */ = {
+		E6AB96B724CE072400A41714 /* Build configuration list for PBXNativeTarget "TvShows" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6AB96B824CE072400A41714 /* Debug */,
@@ -436,7 +450,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E6AB96BA24CE072400A41714 /* Build configuration list for PBXNativeTarget "TvShowTests" */ = {
+		E6AB96BA24CE072400A41714 /* Build configuration list for PBXNativeTarget "TvShowsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6AB96BB24CE072400A41714 /* Debug */,
