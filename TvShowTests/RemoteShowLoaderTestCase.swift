@@ -46,7 +46,11 @@ class RemoteShowLoaderTestCase: XCTestCase {
     }
 
     func test_load_twice(){
-
+        let url = anyURL()
+        let (remoteLoader,client) = makeSUT(url: url)
+        remoteLoader.load()
+        remoteLoader.load()
+        XCTAssertEqual(client.requestedURLs,[url,url])
     }
 
 
