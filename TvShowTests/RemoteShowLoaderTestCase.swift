@@ -8,35 +8,72 @@
 import XCTest
 @testable import TvShows
 
-class HTTPClient{
-    var url : URL?
-    init(url:URL){
-        self.url = url
-    }
+protocol HTTPClient{
+    func get(url:URL)
 }
 
-class RemoteShowLoader{
+protocol ShowLoader{
+    func load()
+}
+
+class RemoteShowLoader : ShowLoader{
+    let url : URL
+    let client : HTTPClient
+
+    init(url:URL, client:HTTPClient) {
+        self.url = url
+        self.client = client
+    }
+
+    func load() {
+        client.get(url: url)
+    }
 
 
 }
 class RemoteShowLoaderTestCase: XCTestCase {
 
     func test_init_doesntLoadWhenCreated(){
-        let sut = makeSUT()
-        let remoteLoader = sut.0
-
-
+        let (_,client) = makeSUT()
+        XCTAssertTrue(client.requestedURLs.isEmpty)
+    }
+    func test_load_whenURLCalled(){
+        let url = anyURL()
+        let (remoteLoader,client) = makeSUT(url: url)
+        remoteLoader.load()
+        XCTAssertEqual(client.requestedURLs,[url])
 
     }
+
+    func test_load_twice(){
+
+    }
+
+
 //MARK:- helpers
-    func makeSUT() -> (RemoteShowLoader, HTTPClient) {
-        let client = HTTPClient(url: anyURL())
-        let remoteShowLoader = RemoteShowLoader()
+    private func makeSUT(url:URL = URL(string:"http://any-url.com")!) -> (RemoteShowLoader, HTTPClientSpy) {
+
+        let client = HTTPClientSpy()
+        let remoteShowLoader = RemoteShowLoader(url: url, client: client)
 
         return (remoteShowLoader,client)
     }
 
-    func anyURL() -> URL{
+    private func anyURL() -> URL{
         return URL(string:"http://any-url.com")!
+    }
+
+    private class  HTTPClientSpy: HTTPClient{
+
+        init(){
+
+        }
+        var requestedURLs = [URL]()
+
+        func get(url:URL) {
+            requestedURLs.append(url)
+        }
+
+
     }
 }
