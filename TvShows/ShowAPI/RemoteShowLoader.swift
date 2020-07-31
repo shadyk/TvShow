@@ -11,7 +11,7 @@ public protocol HTTPClient{
 }
 
 protocol ShowLoader{
-    func load(completion:(Error) -> Void)
+    func load(completion:((Error) -> Void)?)
 }
 
 public final class RemoteShowLoader : ShowLoader{
@@ -23,7 +23,7 @@ public final class RemoteShowLoader : ShowLoader{
         self.client = client
     }
 
-    public func load(completion:(Error)->Void) {
+    public func load(completion:((Error) -> Void)?) {
         client.get(url: url)
     }
 }

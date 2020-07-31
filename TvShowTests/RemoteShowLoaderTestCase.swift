@@ -19,7 +19,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
     func test_load_whenURLCalled(){
         let url = anyURL()
         let (remoteLoader,client) = makeSUT(url: url)
-        remoteLoader.load()
+        remoteLoader.load(completion: nil)
         XCTAssertEqual(client.requestedURLs,[url])
 
     }
@@ -27,16 +27,16 @@ class RemoteShowLoaderTestCase: XCTestCase {
     func test_load_twice(){
         let url = anyURL()
         let (remoteLoader,client) = makeSUT(url: url)
-        remoteLoader.load()
-        remoteLoader.load()
+        remoteLoader.load(completion: nil)
+        remoteLoader.load(completion: nil)
         XCTAssertEqual(client.requestedURLs,[url,url])
     }
 
     func test_load_deliversError(){
         let url = anyURL()
         let (remoteLoader,client) = makeSUT(url: url)
-        remoteLoader.load()
-        remoteLoader.load()
+        remoteLoader.load(completion: nil)
+        remoteLoader.load(completion: nil)
         XCTAssertEqual(client.requestedURLs,[url,url])
     }
 
