@@ -10,6 +10,7 @@
 		E6AB96AD24CE072400A41714 /* TvShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AB96A324CE072400A41714 /* TvShows.framework */; };
 		E6AB96BE24CE088C00A41714 /* TvShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB96BD24CE088C00A41714 /* TvShow.swift */; };
 		E6AB96C024CE110600A41714 /* RemoteShowLoaderTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB96BF24CE110600A41714 /* RemoteShowLoaderTestCase.swift */; };
+		E6E06CAD24D3836100C49810 /* RemoteShowLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E06CAC24D3836100C49810 /* RemoteShowLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		E6AB96B324CE072400A41714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6AB96BD24CE088C00A41714 /* TvShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShow.swift; sourceTree = "<group>"; };
 		E6AB96BF24CE110600A41714 /* RemoteShowLoaderTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteShowLoaderTestCase.swift; sourceTree = "<group>"; };
+		E6E06CAC24D3836100C49810 /* RemoteShowLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteShowLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 		E6AB96A524CE072400A41714 /* TvShows */ = {
 			isa = PBXGroup;
 			children = (
+				E6E06CAB24D3834C00C49810 /* ShowAPI */,
 				E6AB96A724CE072400A41714 /* Info.plist */,
 				E6AB96BD24CE088C00A41714 /* TvShow.swift */,
 			);
@@ -84,6 +87,14 @@
 				E6AB96BF24CE110600A41714 /* RemoteShowLoaderTestCase.swift */,
 			);
 			path = TvShowTests;
+			sourceTree = "<group>";
+		};
+		E6E06CAB24D3834C00C49810 /* ShowAPI */ = {
+			isa = PBXGroup;
+			children = (
+				E6E06CAC24D3836100C49810 /* RemoteShowLoader.swift */,
+			);
+			path = ShowAPI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6AB96BE24CE088C00A41714 /* TvShow.swift in Sources */,
+				E6E06CAD24D3836100C49810 /* RemoteShowLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
