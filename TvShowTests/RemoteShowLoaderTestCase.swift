@@ -49,20 +49,20 @@ class RemoteShowLoaderTestCase: XCTestCase {
         XCTAssertEqual(errors,[.connectivity])
     }
 
-    func test_load_completesWithNoErrorOnClient(){
+    func test_load_completesWithStatusCodeNot200(){
         let (sut,client) = makeSUT(url: anyURL())
 
-        var errors = [RemoteShowLoader.Error]()
 
-        sut.load(){ error in
-            if error != nil {
-                errors.append(error!)
-            }
+
+        let samples = [199,201,400,500]
+        samples.enumerated().forEach{ index,code in
+            var errors = [RemoteShowLoader.Error]()
+            sut.load(){ errors.append($0!) }
+            client.complete(with: code,at: index)
+            XCTAssertEqual(errors,[.invalidData])
+
         }
 
-        client.complete(with: 400)
-
-        XCTAssertEqual(errors,[.invalidData])
     }
 
     //MARK:- helpers
@@ -71,8 +71,8 @@ class RemoteShowLoaderTestCase: XCTestCase {
     private func makeSUT(url:URL) -> (RemoteShowLoader, HTTPClientSpy) {
 
         let client = HTTPClientSpy()
-        let remoteShowLoader = RemoteShowLoader(url: url, client: client)
-        return (remoteShowLoader,client)
+        let sut = RemoteShowLoader(url: url, client: client)
+        return (sut,client)
     }
 
     //CLEINT SPY
