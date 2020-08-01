@@ -60,9 +60,9 @@ class RemoteShowLoaderTestCase: XCTestCase {
             }
         }
 
-        client.complete(with: nil)
+        client.complete(with: 400)
 
-        XCTAssertEqual(errors,[])
+        XCTAssertEqual(errors,[.invalidData])
     }
 
     //MARK:- helpers
@@ -77,17 +77,22 @@ class RemoteShowLoaderTestCase: XCTestCase {
 
     //CLEINT SPY
     private class HTTPClientSpy: HTTPClient{
-        var messages = [(url:URL,completion:(Error?)->Void)]()
+        var messages = [(url:URL,completion: (HTTPClientResult) -> Void)]()
         var requestedURLs : [URL]  {
             return messages.map{$0.url}
         }
 
-        func get(url: URL, completion: @escaping (Error?) -> Void) {
+        func get(url: URL, completion: @escaping (HTTPClientResult) -> Void) {
             messages.append((url:url,completion:completion))
         }
 
-        func complete(with error: Error?, at index:Int = 0){
-            messages[index].completion(error)
+        func complete(with error: Error, at index:Int = 0){
+            messages[index].completion(.failure)
+        }
+
+        func complete(with statusCode: Int, at index:Int = 0){
+            let response = HTTPURLResponse(url: requestedURLs[index], statusCode: statusCode, httpVersion: nil, headerFields: nil)
+            messages[index].completion(.success(response!))
         }
     }
 
