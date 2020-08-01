@@ -27,7 +27,7 @@ public final class RemoteShowLoader {
         self.client = client
     }
 
-    public func load(completion:@escaping (Error?) -> Void = {_ in })  {
+    public func load(completion:@escaping (Error?) -> Void)  {
         client.get(url: url){ error in
             if error != nil {
                 completion(.connectivity)

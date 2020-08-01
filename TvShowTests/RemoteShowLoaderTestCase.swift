@@ -18,7 +18,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
         let url = anyURL()
         let (remoteLoader,client) = makeSUT(url: url)
 
-        remoteLoader.load()
+        remoteLoader.load{_ in }
 
         XCTAssertEqual(client.requestedURLs,[url])
     }
@@ -27,8 +27,8 @@ class RemoteShowLoaderTestCase: XCTestCase {
         let url = anyURL()
         let (remoteLoader,client) = makeSUT(url: url)
 
-        remoteLoader.load()
-        remoteLoader.load()
+        remoteLoader.load{_ in }
+        remoteLoader.load {_ in }
 
         XCTAssertEqual(client.requestedURLs,[url,url])
     }
