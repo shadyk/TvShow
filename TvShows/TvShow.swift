@@ -11,7 +11,7 @@ enum Genre{
     case comedy, action
 }
 
-struct TvShow{
+public struct TvShow : Equatable{
     var id : UUID
     var name: String
     var language: String

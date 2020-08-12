@@ -36,34 +36,51 @@ class RemoteShowLoaderTestCase: XCTestCase {
     func test_load_deliversErrorOnClient(){
         let (sut,client) = makeSUT(url: anyURL())
 
-        var errors = [RemoteShowLoader.Error]()
+        var results = [RemoteShowLoader.Result]()
 
-        sut.load(){ error in
-            if error != nil {
-                errors.append(error!)
-            }
-        }
+        sut.load(){ results.append($0)}
 
         client.complete(with: NSError())
 
-        XCTAssertEqual(errors,[.connectivity])
+        XCTAssertEqual(results,[.failure(.connectivity)])
     }
 
     func test_load_completesWithStatusCodeNot200(){
         let (sut,client) = makeSUT(url: anyURL())
 
-
-
         let samples = [199,201,400,500]
         samples.enumerated().forEach{ index,code in
-            var errors = [RemoteShowLoader.Error]()
-            sut.load(){ errors.append($0!) }
+            var results = [RemoteShowLoader.Result]()
+
+            sut.load(){ results.append($0) }
             client.complete(with: code,at: index)
-            XCTAssertEqual(errors,[.invalidData])
-
+            XCTAssertEqual(results,[.failure(.invalidData)])
         }
-
     }
+
+    func test_load_completesWithStatusCode200InValidJson(){
+        let (sut,client) = makeSUT(url: anyURL())
+        var errors = [RemoteShowLoader.Result]()
+
+        sut.load(){ errors.append($0) }
+        let invalidJsonData = Data("non json string".utf8)
+        client.complete(withData: invalidJsonData)
+
+        XCTAssertEqual(errors,[.failure(.invalidData)])
+    }
+
+    func test_load_completesWithSuccessEmpty(){
+        let (sut,client) = makeSUT(url: anyURL())
+        var result = [RemoteShowLoader.Result]()
+
+        sut.load(){ result.append($0) }
+        let emptyData = Data("{\"key\":[]}".utf8)
+        client.complete(withData: emptyData)
+
+        XCTAssertEqual(result,[.success([])])
+    }
+
+
 
     //MARK:- helpers
 
@@ -75,25 +92,33 @@ class RemoteShowLoaderTestCase: XCTestCase {
         return (sut,client)
     }
 
+
     //CLEINT SPY
     private class HTTPClientSpy: HTTPClient{
-        var messages = [(url:URL,completion: (HTTPClientResult) -> Void)]()
+        var messages = [(url:URL,completion: (HttpClientResult) -> Void)]()
         var requestedURLs : [URL]  {
             return messages.map{$0.url}
         }
 
-        func get(url: URL, completion: @escaping (HTTPClientResult) -> Void) {
+        func get(url: URL, completion: @escaping (HttpClientResult) -> Void) {
             messages.append((url:url,completion:completion))
         }
 
         func complete(with error: Error, at index:Int = 0){
-            messages[index].completion(.failure)
+            messages[index].completion(.failure(error))
         }
+
+        func complete(withData data: Data, at index:Int = 0){
+            let response = HTTPURLResponse(url: requestedURLs[index], statusCode: 200, httpVersion: nil, headerFields: nil)
+
+            messages[index].completion(.success(data, response!))
+             }
 
         func complete(with statusCode: Int, at index:Int = 0){
             let response = HTTPURLResponse(url: requestedURLs[index], statusCode: statusCode, httpVersion: nil, headerFields: nil)
-            messages[index].completion(.success(response!))
+            messages[index].completion(.success(Data(), response!))
         }
+
     }
 
 
