@@ -36,13 +36,10 @@ class RemoteShowLoaderTestCase: XCTestCase {
     func test_load_deliversErrorOnClient(){
         let (sut,client) = makeSUT(url: anyURL())
 
-        var results = [RemoteShowLoader.Result]()
+        expect(sut, toCompleteWith: .failure(.connectivity), when: {
+            client.complete(with: NSError())
+        })
 
-        sut.load(){ results.append($0)}
-
-        client.complete(with: NSError())
-
-        XCTAssertEqual(results,[.failure(.connectivity)])
     }
 
     func test_load_completesWithStatusCodeNot200(){
@@ -50,34 +47,28 @@ class RemoteShowLoaderTestCase: XCTestCase {
 
         let samples = [199,201,400,500]
         samples.enumerated().forEach{ index,code in
-            var results = [RemoteShowLoader.Result]()
-
-            sut.load(){ results.append($0) }
-            client.complete(with: code,at: index)
-            XCTAssertEqual(results,[.failure(.invalidData)])
+            expect(sut, toCompleteWith: .failure(.invalidData), when: {
+                client.complete(with: code,at: index)
+            })
         }
     }
 
     func test_load_completesWithStatusCode200InValidJson(){
         let (sut,client) = makeSUT(url: anyURL())
-        var errors = [RemoteShowLoader.Result]()
 
-        sut.load(){ errors.append($0) }
-        let invalidJsonData = Data("non json string".utf8)
-        client.complete(withData: invalidJsonData)
-
-        XCTAssertEqual(errors,[.failure(.invalidData)])
+        expect(sut, toCompleteWith: .failure(.invalidData), when: {
+            let invalidJsonData = Data("non json string".utf8)
+            client.complete(withData: invalidJsonData)
+        })
     }
 
     func test_load_completesWithSuccessEmpty(){
         let (sut,client) = makeSUT(url: anyURL())
-        var result = [RemoteShowLoader.Result]()
 
-        sut.load(){ result.append($0) }
-        let emptyData = Data("{\"key\":[]}".utf8)
-        client.complete(withData: emptyData)
-
-        XCTAssertEqual(result,[.success([])])
+        expect(sut, toCompleteWith: .success([]), when: {
+            let emptyData = Data("{\"key\":[]}".utf8)
+            client.complete(withData: emptyData)
+        })
     }
 
 
@@ -112,7 +103,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
             let response = HTTPURLResponse(url: requestedURLs[index], statusCode: 200, httpVersion: nil, headerFields: nil)
 
             messages[index].completion(.success(data, response!))
-             }
+        }
 
         func complete(with statusCode: Int, at index:Int = 0){
             let response = HTTPURLResponse(url: requestedURLs[index], statusCode: statusCode, httpVersion: nil, headerFields: nil)
@@ -125,6 +116,29 @@ class RemoteShowLoaderTestCase: XCTestCase {
     //HELPER
     private func anyURL() -> URL{
         return URL(string:"http://any-url.com")!
+    }
+
+    private func expect(_ sut: RemoteShowLoader, toCompleteWith expectedResult: RemoteShowLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+        let exp = expectation(description: "Wait for load completion")
+
+        sut.load { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.success(receivedItems), .success(expectedItems)):
+                XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
+
+            case let (.failure(receivedError), .failure(expectedError)):
+                XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+
+            default:
+                XCTFail("Expected result \(expectedResult) got \(receivedResult) instead", file: file, line: line)
+            }
+
+            exp.fulfill()
+        }
+
+        action()
+
+        wait(for: [exp], timeout: 1.0)
     }
 
 }
