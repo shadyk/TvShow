@@ -88,7 +88,19 @@ class RemoteShowLoaderTestCase: XCTestCase {
             })
     }
 
+    func test_load_doesntSucceedWhenSUTisDeallocated(){
+        //this means if remoteloader became nil and client completes, we should not run the completions i.e. capturedResults
+        let client = HTTPClientSpy()
+        var sut :RemoteShowLoader? = RemoteShowLoader(url: anyURL(), client:client )
+        var capturedResults = [RemoteShowLoader.Result]()
 
+        sut?.load { capturedResults.append($0) }
+        sut = nil
+        client.complete(withStatusCode: 200, data: Data("any data".utf8))
+
+        XCTAssertTrue(capturedResults.isEmpty)
+
+    }
 
 
     //MARK:- helpers

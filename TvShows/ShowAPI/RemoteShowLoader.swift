@@ -34,7 +34,8 @@ public final class RemoteShowLoader {
     }
 
     public func load(completion:@escaping (Result) -> Void) {
-        client.get(url: url){ result in
+        client.get(url: url){ [weak self] result in
+            guard self != nil else { return}
             switch result {
             case let .success(data,response):
                 completion(RemoteShowMapper.map(data: data, response:response))
