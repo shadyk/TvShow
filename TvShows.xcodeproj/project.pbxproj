@@ -10,7 +10,7 @@
 		E617C6FF24E9796800F30ECB /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E617C6FE24E9796800F30ECB /* HttpClient.swift */; };
 		E617C70124E979AA00F30ECB /* RemoteShowMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E617C70024E979AA00F30ECB /* RemoteShowMapper.swift */; };
 		E6AB96AD24CE072400A41714 /* TvShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AB96A324CE072400A41714 /* TvShows.framework */; };
-		E6AB96BE24CE088C00A41714 /* TvShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB96BD24CE088C00A41714 /* TvShow.swift */; };
+		E6AB96BE24CE088C00A41714 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB96BD24CE088C00A41714 /* Show.swift */; };
 		E6AB96C024CE110600A41714 /* RemoteShowLoaderTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB96BF24CE110600A41714 /* RemoteShowLoaderTestCase.swift */; };
 		E6E06CAD24D3836100C49810 /* RemoteShowLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E06CAC24D3836100C49810 /* RemoteShowLoader.swift */; };
 /* End PBXBuildFile section */
@@ -32,7 +32,7 @@
 		E6AB96A724CE072400A41714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6AB96AC24CE072400A41714 /* TvShowsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TvShowsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AB96B324CE072400A41714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E6AB96BD24CE088C00A41714 /* TvShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShow.swift; sourceTree = "<group>"; };
+		E6AB96BD24CE088C00A41714 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		E6AB96BF24CE110600A41714 /* RemoteShowLoaderTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteShowLoaderTestCase.swift; sourceTree = "<group>"; };
 		E6E06CAC24D3836100C49810 /* RemoteShowLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteShowLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,10 +64,20 @@
 			path = RemoteShowLoaderTests;
 			sourceTree = "<group>";
 		};
+		E617C70324E994D700F30ECB /* Show Feature */ = {
+			isa = PBXGroup;
+			children = (
+				E617C70024E979AA00F30ECB /* RemoteShowMapper.swift */,
+				E6AB96BD24CE088C00A41714 /* Show.swift */,
+			);
+			path = "Show Feature";
+			sourceTree = "<group>";
+		};
 		E6AB969924CE072400A41714 = {
 			isa = PBXGroup;
 			children = (
 				E6AB96A524CE072400A41714 /* TvShows */,
+				E6AB96A724CE072400A41714 /* Info.plist */,
 				E6AB96B024CE072400A41714 /* TvShowTests */,
 				E6AB96A424CE072400A41714 /* Products */,
 			);
@@ -86,8 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				E6E06CAB24D3834C00C49810 /* ShowAPI */,
-				E6AB96A724CE072400A41714 /* Info.plist */,
-				E6AB96BD24CE088C00A41714 /* TvShow.swift */,
+				E617C70324E994D700F30ECB /* Show Feature */,
 			);
 			path = TvShows;
 			sourceTree = "<group>";
@@ -106,7 +115,6 @@
 			children = (
 				E6E06CAC24D3836100C49810 /* RemoteShowLoader.swift */,
 				E617C6FE24E9796800F30ECB /* HttpClient.swift */,
-				E617C70024E979AA00F30ECB /* RemoteShowMapper.swift */,
 			);
 			path = ShowAPI;
 			sourceTree = "<group>";
@@ -220,7 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6AB96BE24CE088C00A41714 /* TvShow.swift in Sources */,
+				E6AB96BE24CE088C00A41714 /* Show.swift in Sources */,
 				E617C6FF24E9796800F30ECB /* HttpClient.swift in Sources */,
 				E6E06CAD24D3836100C49810 /* RemoteShowLoader.swift in Sources */,
 				E617C70124E979AA00F30ECB /* RemoteShowMapper.swift in Sources */,
@@ -376,7 +384,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TvShows/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -404,7 +412,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TvShows/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

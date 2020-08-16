@@ -174,8 +174,8 @@ class RemoteShowLoaderTestCase: XCTestCase {
     }
 
 
-    private func makeItem(id: UUID, name: String, language: String,status:String, genres:[String]) -> (model: TvShow, json: [String: Any]) {
-        let item = TvShow(id: id, name: name, language: language, status: status,genres: genres)
+    private func makeItem(id: UUID, name: String, language: String,status:String, genres:[String]) -> (model: Show, json: [String: Any]) {
+        let item = Show(id: id, name: name, language: language, status: status,genres: genres)
 
         let json = [
             "id": id.uuidString,

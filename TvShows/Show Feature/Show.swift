@@ -11,7 +11,7 @@ import Foundation
 //    case comedy, action
 //}
 
-public struct TvShow : Equatable{
+public struct Show : Equatable{
     var id : UUID
     var name: String
     var language: String

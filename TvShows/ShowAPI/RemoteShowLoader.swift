@@ -24,7 +24,7 @@ public final class RemoteShowLoader {
     }
 
     public enum Result : Equatable {
-        case success(TvShow?)
+        case success(Show?)
         case failure(Error)
     }
 

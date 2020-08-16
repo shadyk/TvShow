@@ -18,8 +18,8 @@ final class RemoteShowMapper{
         var message : String?
         var code : Int?
 
-        var tvShow : TvShow {
-             return TvShow(id: self.id, name: self.name, language: self.language, status:    self.status,genres: self.genres)
+        var tvShow : Show {
+             return Show(id: self.id, name: self.name, language: self.language, status:    self.status,genres: self.genres)
         }
     }
 
