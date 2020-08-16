@@ -49,7 +49,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
         samples.enumerated().forEach{ index,code in
             expect(sut, toCompleteWith: .failure(.invalidData), when: {
                 let notFoundData = Data("{\"name\":\"Not Found\"}".utf8)
-                client.complete(withStatusCode: code, data:notFoundData, at: index)
+                client.complete(withStatusCode: code,data:notFoundData, at: index)
             })
         }
     }
@@ -94,10 +94,12 @@ class RemoteShowLoaderTestCase: XCTestCase {
     //MARK:- helpers
 
     //MAKE SUT
-    private func makeSUT(url:URL) -> (RemoteShowLoader, HTTPClientSpy) {
+    private func makeSUT(url:URL,file: StaticString = #file, line: UInt = #line) -> (RemoteShowLoader, HTTPClientSpy) {
 
         let client = HTTPClientSpy()
         let sut = RemoteShowLoader(url: url, client: client)
+        trackForMemoryLeak(client,file: file,line: line)
+        trackForMemoryLeak(sut,file: file,line: line)
         return (sut,client)
     }
 
@@ -151,6 +153,12 @@ class RemoteShowLoaderTestCase: XCTestCase {
         action()
 
         wait(for: [exp], timeout: 1.0)
+    }
+
+    private func trackForMemoryLeak(_ instance:AnyObject,file: StaticString = #file, line: UInt = #line){
+        addTeardownBlock {[weak instance] in
+            XCTAssertNil(instance,"instance Should deallocate after using. Potenial memory leak",file: file,line: line)
+        }
     }
 
 
