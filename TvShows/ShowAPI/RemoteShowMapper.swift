@@ -30,16 +30,19 @@ final class RemoteShowMapper{
         var name : String
     }
 
-    static func map(data:Data, response:HTTPURLResponse) throws -> TvShow? {
+    static func map(data:Data,response:HTTPURLResponse) -> RemoteShowLoader.Result{
         guard response.statusCode == 200 else{
-            throw RemoteShowLoader.Error.invalidData
+            return .failure(.invalidData)
         }
+
         if  let json = try? JSONDecoder().decode(RemoteTvShow.self, from: data) {
-            return json.map()
+            return .success(json.map())
         }
         else if let _ = try? JSONDecoder().decode(ErrorObject.self, from: data){
-            throw RemoteShowLoader.Error.notFound
+            return.failure(.notFound)
         }
-        throw RemoteShowLoader.Error.invalidData
-    }
+        else{
+            return.failure(.invalidData)
+        }
+     }
 }
