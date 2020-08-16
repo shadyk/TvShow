@@ -56,6 +56,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E617C70224E9941B00F30ECB /* RemoteShowLoaderTests */ = {
+			isa = PBXGroup;
+			children = (
+				E6AB96BF24CE110600A41714 /* RemoteShowLoaderTestCase.swift */,
+			);
+			path = RemoteShowLoaderTests;
+			sourceTree = "<group>";
+		};
 		E6AB969924CE072400A41714 = {
 			isa = PBXGroup;
 			children = (
@@ -88,7 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				E6AB96B324CE072400A41714 /* Info.plist */,
-				E6AB96BF24CE110600A41714 /* RemoteShowLoaderTestCase.swift */,
+				E617C70224E9941B00F30ECB /* RemoteShowLoaderTests */,
 			);
 			path = TvShowTests;
 			sourceTree = "<group>";
