@@ -11,15 +11,6 @@ import Foundation
 //    func load(completion:((Error) -> Void)?)
 //}
 
-public enum HttpClientResult {
-    case success(Data,HTTPURLResponse)
-    case failure(Error)
-}
-
-public protocol HTTPClient{
-
-    func get(url:URL, completion: @escaping(HttpClientResult) -> Void)
-}
 
 
 public final class RemoteShowLoader {

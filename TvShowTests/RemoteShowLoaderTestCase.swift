@@ -49,7 +49,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
         samples.enumerated().forEach{ index,code in
             expect(sut, toCompleteWith: .failure(.invalidData), when: {
                 let notFoundData = Data("{\"name\":\"Not Found\"}".utf8)
-                client.complete(withStatusCode: code,data:notFoundData,at: index)
+                client.complete(withStatusCode: code, data:notFoundData, at: index)
             })
         }
     }
