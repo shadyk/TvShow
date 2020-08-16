@@ -67,7 +67,6 @@
 		E617C70324E994D700F30ECB /* Show Feature */ = {
 			isa = PBXGroup;
 			children = (
-				E617C70024E979AA00F30ECB /* RemoteShowMapper.swift */,
 				E6AB96BD24CE088C00A41714 /* Show.swift */,
 			);
 			path = "Show Feature";
@@ -95,8 +94,8 @@
 		E6AB96A524CE072400A41714 /* TvShows */ = {
 			isa = PBXGroup;
 			children = (
-				E6E06CAB24D3834C00C49810 /* ShowAPI */,
 				E617C70324E994D700F30ECB /* Show Feature */,
+				E6E06CAB24D3834C00C49810 /* Show API */,
 			);
 			path = TvShows;
 			sourceTree = "<group>";
@@ -110,13 +109,14 @@
 			path = TvShowTests;
 			sourceTree = "<group>";
 		};
-		E6E06CAB24D3834C00C49810 /* ShowAPI */ = {
+		E6E06CAB24D3834C00C49810 /* Show API */ = {
 			isa = PBXGroup;
 			children = (
+				E617C70024E979AA00F30ECB /* RemoteShowMapper.swift */,
 				E6E06CAC24D3836100C49810 /* RemoteShowLoader.swift */,
 				E617C6FE24E9796800F30ECB /* HttpClient.swift */,
 			);
-			path = ShowAPI;
+			path = "Show API";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
