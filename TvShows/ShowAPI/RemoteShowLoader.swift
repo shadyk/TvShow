@@ -37,18 +37,19 @@ public final class RemoteShowLoader {
         client.get(url: url){ result in
             switch result {
             case let .success(data,response):
-
-                do{
-                    let show = try RemoteShowMapper.map(data: data, response: response)
-                    completion(.success(show))
-                }
-                catch(let error){
-                    completion(.failure(error as! RemoteShowLoader.Error))
-                }
-
+                completion(self.map(data: data, response: response))
             case .failure:
                 completion(.failure(.connectivity))
             }
+        }
+    }
+    private func map(data:Data,response:HTTPURLResponse) -> Result{
+        do{
+            let show = try RemoteShowMapper.map(data: data, response: response)
+            return .success(show)
+        }
+        catch(let error){
+            return .failure(error as! RemoteShowLoader.Error)
         }
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 final class RemoteShowMapper{
+
     private struct RemoteTvShow : Decodable{
         var id : UUID
         var name: String
