@@ -57,30 +57,37 @@ class RemoteShowLoaderTestCase: XCTestCase {
     func test_load_completesWithStatusCode200InValidJson(){
         let (sut,client) = makeSUT(url: anyURL())
 
-        expect(sut, toCompleteWith: .failure(.invalidData), when: {
-            let invalidJsonData = Data("non json string".utf8)
-            client.complete(withData: invalidJsonData)
-        })
+        expect(sut,
+               toCompleteWith: .failure(.invalidData),
+               when: {
+                let invalidJsonData = Data("non json string".utf8)
+                client.complete(withData: invalidJsonData)}
+        )
     }
 
-    func test_load_completesWithSuccessEmpty(){
+    func test_load_completesWithSuccessNotFound(){
         let (sut,client) = makeSUT(url: anyURL())
 
-        expect(sut, toCompleteWith: .failure(.notFound), when: {
-            let emptyData = Data("{\"name\":\"Not Found\",\"status\":404, \"code\":0,\"message\":\"empty\"}".utf8)
-            client.complete(withData: emptyData)
+        expect(sut,
+               toCompleteWith: .failure(.notFound),
+               when: {
+            let notFoundData = Data("{\"name\":\"Not Found\",\"status\":404, \"code\":0,\"message\":\"not found\"}".utf8)
+            client.complete(withData: notFoundData)
         })
     }
 
-    func test_load_completesWithSuccessItems(){
+    func test_load_completesWithSuccessItem(){
         let (sut,client) = makeSUT(url: anyURL())
-        let item1 = makeItem(id: UUID(), name: "name", language: "english", status: "Ended", genres: ["comedy"])
+        let item = makeItem(id: UUID(), name: "name", language: "english", status: "Ended", genres: ["comedy"])
 
-        expect(sut, toCompleteWith: .success(item1.model), when: {
-            let data = makeItemJSON(item1.json)
-            client.complete(withData: data)
-        })
+        expect(sut,
+               toCompleteWith: .success(item.model),
+               when: {
+                let data = makeItemJSON(item.json)
+                client.complete(withData: data)
+            })
     }
+
 
 
 
