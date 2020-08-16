@@ -48,7 +48,8 @@ class RemoteShowLoaderTestCase: XCTestCase {
         let samples = [199,201,400,500]
         samples.enumerated().forEach{ index,code in
             expect(sut, toCompleteWith: .failure(.invalidData), when: {
-                client.complete(with: code,at: index)
+                let notFoundData = Data("{\"name\":\"Not Found\"}".utf8)
+                client.complete(with: code,data:notFoundData,at: index)
             })
         }
     }
@@ -65,9 +66,19 @@ class RemoteShowLoaderTestCase: XCTestCase {
     func test_load_completesWithSuccessEmpty(){
         let (sut,client) = makeSUT(url: anyURL())
 
-        expect(sut, toCompleteWith: .success([]), when: {
-            let emptyData = Data("{\"key\":[]}".utf8)
+        expect(sut, toCompleteWith: .failure(.notFound), when: {
+            let emptyData = Data("{\"name\":\"Not Found\",\"status\":404, \"code\":0,\"message\":\"empty\"}".utf8)
             client.complete(withData: emptyData)
+        })
+    }
+
+    func test_load_completesWithSuccessItems(){
+        let (sut,client) = makeSUT(url: anyURL())
+        let item1 = makeItem(id: UUID(), name: "name", language: "english", status: "Ended", genres: ["comedy"])
+
+        expect(sut, toCompleteWith: .success(item1.model), when: {
+            let data = makeItemJSON(item1.json)
+            client.complete(withData: data)
         })
     }
 
@@ -105,9 +116,9 @@ class RemoteShowLoaderTestCase: XCTestCase {
             messages[index].completion(.success(data, response!))
         }
 
-        func complete(with statusCode: Int, at index:Int = 0){
+        func complete(with statusCode: Int, data:Data,at index:Int = 0){
             let response = HTTPURLResponse(url: requestedURLs[index], statusCode: statusCode, httpVersion: nil, headerFields: nil)
-            messages[index].completion(.success(Data(), response!))
+            messages[index].completion(.success(data, response!))
         }
 
     }
@@ -141,4 +152,85 @@ class RemoteShowLoaderTestCase: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
 
+
+    private func makeItem(id: UUID, name: String, language: String,status:String, genres:[String]) -> (model: TvShow, json: [String: Any]) {
+        let item = TvShow(id: id, name: name, language: language, status: status,genres: genres)
+
+        let json = [
+            "id": id.uuidString,
+            "name": name,
+            "language": language,
+            "genres" : genres,
+            "status" : status,
+        ].compactMapValues { $0 }
+
+        return (item, json)
+    }
+
+    private func makeItemJSON(_ item: [String: Any]) -> Data {
+        return try! JSONSerialization.data(withJSONObject: item)
+    }
+
+
 }
+
+//type: Scripted
+//premiered: 1973-03-26
+//genres: (
+//    Drama,
+//    Family,
+//    Romance
+//)
+//status: Running
+//runtime: 60
+//officialSite: http://www.cbs.com/shows/the_young_and_the_restless/
+//externals: {
+//    imdb = tt0069658;
+//    thetvdb = 70328;
+//    tvrage = 6318;
+//}
+//weight: 96
+//url: http://www.tvmaze.com/shows/4344/the-young-and-the-restless
+//language: English
+//_links: {
+//    nextepisode =     {
+//        href = "http://api.tvmaze.com/episodes/1910518";
+//    };
+//    previousepisode =     {
+//        href = "http://api.tvmaze.com/episodes/1910517";
+//    };
+//    self =     {
+//        href = "http://api.tvmaze.com/shows/4344";
+//    };
+//}
+//schedule: {
+//    days =     (
+//        Monday,
+//        Tuesday,
+//        Wednesday,
+//        Thursday,
+//        Friday
+//    );
+//    time = "12:30";
+//}
+//network: {
+//    country =     {
+//        code = US;
+//        name = "United States";
+//        timezone = "America/New_York";
+//    };
+//    id = 2;
+//    name = CBS;
+//}
+//summary: <p><b>The Young and the Restless</b> revolves around the rivalries, romances, hopes and fears of the residents of the fictional Midwestern metropolis, Genoa City. The lives and loves of a wide variety of characters mingle through the generations, dominated by the Newman, Abbott, Chancellor, Baldwin and Winters families. ­ When The Young and the Restless premiered in 1973, it revolutionized the daytime drama. It continues to set the standard with strong characters, socially conscious storylines, romance and sensuality.</p>
+//rating: {
+//    average = "6.4";
+//}
+//webChannel: <null>
+//updated: 1597006008
+//image: {
+//    medium = "http://static.tvmaze.com/uploads/images/medium_portrait/233/583614.jpg";
+//    original = "http://static.tvmaze.com/uploads/images/original_untouched/233/583614.jpg";
+//}
+//id: 4344
+//name: The Young and the Restless

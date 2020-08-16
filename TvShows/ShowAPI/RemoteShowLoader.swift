@@ -29,10 +29,11 @@ public final class RemoteShowLoader {
     public enum Error : Swift.Error {
         case connectivity
         case invalidData
+        case notFound
     }
 
     public enum Result : Equatable {
-        case success([TvShow])
+        case success(TvShow?)
         case failure(Error)
     }
 
@@ -44,16 +45,31 @@ public final class RemoteShowLoader {
     public func load(completion:@escaping (Result) -> Void) {
         client.get(url: url){ result in
             switch result {
-            case let .success(data,_):
-                if let _ = try? JSONSerialization.jsonObject(with: data){
-                    completion(.success([]))
+            case let .success(data,response):
+
+                if response.statusCode == 200 {
+                    if  let json = try? JSONDecoder().decode(TvShow.self, from: data) {
+                        completion(.success(json))
+                    }
+                    else if let _ = try? JSONDecoder().decode(ErrorObject.self, from: data){
+                        completion(.failure(.notFound))
+                    }
+                    else{
+                             completion(.failure(.invalidData))
+                         }
                 }
                 else{
                     completion(.failure(.invalidData))
                 }
+
             case .failure:
                 completion(.failure(.connectivity))
             }
         }
     }
 }
+
+
+
+
+
