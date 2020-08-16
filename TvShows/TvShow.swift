@@ -7,9 +7,9 @@
 
 import Foundation
 
-public enum Genre {
-    case comedy, action
-}
+//public enum Genre {
+//    case comedy, action
+//}
 
 public struct TvShow : Equatable{
     var id : UUID
@@ -17,8 +17,6 @@ public struct TvShow : Equatable{
     var language: String
     var genres : [String]?
     var status : String
-    var message : String?
-    var code : Int?
 
     public init(id : UUID,name: String, language: String, status: String, genres : [String]? = nil){
         self.id = id
@@ -29,26 +27,46 @@ public struct TvShow : Equatable{
     }
 }
 
-extension TvShow : Decodable{
-    private enum CodingKeys : String, CodingKey{
-        case id
-        case name
-        case status
-        case language
-        case genres
-        case message
-        case code
+
+class RemoteShowMapper{
+    struct RemoteTvShow : Decodable{
+        var id : UUID
+        var name: String
+        var language: String
+        var genres : [String]?
+        var status : String
+        var message : String?
+        var code : Int?
+
+        func map()->TvShow{
+            return TvShow(id: self.id, name: self.name, language: self.language, status:    self.status,genres: self.genres)
+        }
+    }
+
+    struct ErrorObject : Decodable {
+        var status : Int
+        var message : String
+        var code : Int
+        var name : String
+    }
+
+    static func map(data:Data, response:HTTPURLResponse) throws -> TvShow? {
+        guard response.statusCode == 200 else{
+            throw RemoteShowLoader.Error.invalidData
+        }
+        if  let json = try? JSONDecoder().decode(RemoteTvShow.self, from: data) {
+            return json.map()
+        }
+        else if let _ = try? JSONDecoder().decode(ErrorObject.self, from: data){
+            throw RemoteShowLoader.Error.notFound
+        }
+        throw RemoteShowLoader.Error.invalidData
     }
 }
 
 
 
-public struct ErrorObject : Decodable{
-    var status : Int
-    var message : String
-    var code : Int
-    var name : String
-}
+
 
 
 

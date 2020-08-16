@@ -47,19 +47,12 @@ public final class RemoteShowLoader {
             switch result {
             case let .success(data,response):
 
-                if response.statusCode == 200 {
-                    if  let json = try? JSONDecoder().decode(TvShow.self, from: data) {
-                        completion(.success(json))
-                    }
-                    else if let _ = try? JSONDecoder().decode(ErrorObject.self, from: data){
-                        completion(.failure(.notFound))
-                    }
-                    else{
-                             completion(.failure(.invalidData))
-                         }
+                do{
+                    let show = try RemoteShowMapper.map(data: data, response: response)
+                    completion(.success(show))
                 }
-                else{
-                    completion(.failure(.invalidData))
+                catch(let error){
+                    completion(.failure(error as! RemoteShowLoader.Error))
                 }
 
             case .failure:
