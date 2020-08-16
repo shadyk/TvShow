@@ -18,8 +18,8 @@ final class RemoteShowMapper{
         var message : String?
         var code : Int?
 
-        func map()->TvShow{
-            return TvShow(id: self.id, name: self.name, language: self.language, status:    self.status,genres: self.genres)
+        var tvShow : TvShow {
+             return TvShow(id: self.id, name: self.name, language: self.language, status:    self.status,genres: self.genres)
         }
     }
 
@@ -35,8 +35,8 @@ final class RemoteShowMapper{
             return .failure(.invalidData)
         }
 
-        if  let json = try? JSONDecoder().decode(RemoteTvShow.self, from: data) {
-            return .success(json.map())
+        if  let remoteTvShow = try? JSONDecoder().decode(RemoteTvShow.self, from: data) {
+            return .success(remoteTvShow.tvShow)
         }
         else if let _ = try? JSONDecoder().decode(ErrorObject.self, from: data){
             return.failure(.notFound)
