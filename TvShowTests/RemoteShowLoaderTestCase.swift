@@ -49,7 +49,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
         samples.enumerated().forEach{ index,code in
             expect(sut, toCompleteWith: .failure(.invalidData), when: {
                 let notFoundData = Data("{\"name\":\"Not Found\"}".utf8)
-                client.complete(with: code,data:notFoundData,at: index)
+                client.complete(withStatusCode: code,data:notFoundData,at: index)
             })
         }
     }
@@ -61,7 +61,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
                toCompleteWith: .failure(.invalidData),
                when: {
                 let invalidJsonData = Data("non json string".utf8)
-                client.complete(withData: invalidJsonData)}
+                client.complete(withStatusCode: 200, data: invalidJsonData)}
         )
     }
 
@@ -72,7 +72,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
                toCompleteWith: .failure(.notFound),
                when: {
             let notFoundData = Data("{\"name\":\"Not Found\",\"status\":404, \"code\":0,\"message\":\"not found\"}".utf8)
-            client.complete(withData: notFoundData)
+                client.complete(withStatusCode: 200, data: notFoundData)
         })
     }
 
@@ -84,7 +84,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
                toCompleteWith: .success(item.model),
                when: {
                 let data = makeItemJSON(item.json)
-                client.complete(withData: data)
+                client.complete(withStatusCode: 200, data: data)
             })
     }
 
@@ -117,14 +117,8 @@ class RemoteShowLoaderTestCase: XCTestCase {
             messages[index].completion(.failure(error))
         }
 
-        func complete(withData data: Data, at index:Int = 0){
-            let response = HTTPURLResponse(url: requestedURLs[index], statusCode: 200, httpVersion: nil, headerFields: nil)
-
-            messages[index].completion(.success(data, response!))
-        }
-
-        func complete(with statusCode: Int, data:Data,at index:Int = 0){
-            let response = HTTPURLResponse(url: requestedURLs[index], statusCode: statusCode, httpVersion: nil, headerFields: nil)
+        func complete(withStatusCode: Int, data:Data,at index:Int = 0){
+            let response = HTTPURLResponse(url: requestedURLs[index], statusCode: withStatusCode, httpVersion: nil, headerFields: nil)
             messages[index].completion(.success(data, response!))
         }
 
