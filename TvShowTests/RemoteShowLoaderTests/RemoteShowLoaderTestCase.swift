@@ -140,9 +140,6 @@ class RemoteShowLoaderTestCase: XCTestCase {
 
 
     //HELPER
-    private func anyURL() -> URL{
-        return URL(string:"http://any-url.com")!
-    }
 
     private func expect(_ sut: RemoteShowLoader, toCompleteWith expectedResult: RemoteShowLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for load completion")
