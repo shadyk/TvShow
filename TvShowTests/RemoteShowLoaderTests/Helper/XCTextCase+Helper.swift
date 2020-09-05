@@ -21,5 +21,14 @@ extension XCTestCase {
         return NSError(domain: "any error", code: 1)
     }
 
+    func anyData() -> Data {
+        return Data("any".utf8)
+    }
+
+    func anyHttpResponse() -> HTTPURLResponse? {
+        return HTTPURLResponse(url: anyURL(), statusCode: 200, httpVersion: nil, headerFields: nil)
+    }
+
+
 
 }
