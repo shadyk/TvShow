@@ -24,10 +24,16 @@ class URLSessionHTTPClient {
 
 class URLSessionHTTPClientTests: XCTestCase {
 
-
+    override func setUp() {
+        super.setUp()
+        URLProtocolStub.startInterceptingRequests()
+    }
+    override func tearDown() {
+        super.tearDown()
+        URLProtocolStub.stopInterceptingRequests()
+    }
     func test_getFromURL_performsGETrequest(){
         //BY USING THIS METHOD WE CAN ALSO TEST THE BODY, QUERY PARAMETERS IN THE REQUEST OBSERVER
-        URLProtocolStub.startInterceptingRequests()
         let url = URL(string: "http://any-url.com")!
         let exp = expectation(description: "Wait for completion")
         URLProtocolStub.observeRequests{ request in
@@ -37,12 +43,10 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
         URLSessionHTTPClient().get(from: url, completion: {_ in })
         waitForExpectations(timeout: 0.1)
-        URLProtocolStub.stopInterceptingRequests()
     }
 
     func test_getFromURL_failsOnRequestError() {
 
-        URLProtocolStub.startInterceptingRequests()
         let url = URL(string: "http://any-url.com")!
         let error = NSError(domain: "any error", code: 1)
         URLProtocolStub.stub(data: nil, response: nil, error: error)
@@ -63,7 +67,6 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
 
         wait(for: [exp], timeout: 1.0)
-        URLProtocolStub.stopInterceptingRequests()
     }
 
     // MARK: - Helpers
