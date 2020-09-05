@@ -6,14 +6,14 @@
 import XCTest
 import TvShows
 
-class URLSessionHTTPClient {
+class URLSessionHTTPClient : HTTPClient {
     private let session: URLSession
 
     init(session: URLSession = .shared) {
         self.session = session
     }
     struct UnexpectedValueRepresentaiton : Error {}
-    func get(from url: URL, completion: @escaping (HttpClientResult) -> Void) {
+    func get(url: URL, completion: @escaping (HttpClientResult) -> Void) {
         session.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
@@ -48,7 +48,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             XCTAssertEqual(request.httpMethod, "GET")
             exp.fulfill()
         }
-        makeSUT().get(from: url, completion: {_ in })
+        makeSUT().get(url: url, completion: {_ in })
         waitForExpectations(timeout: 0.1)
     }
 
@@ -102,7 +102,7 @@ class URLSessionHTTPClientTests: XCTestCase {
 
     // MARK: - Helpers
 
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> URLSessionHTTPClient{
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> HTTPClient{
         let sut = URLSessionHTTPClient()
         trackForMemoryLeak(sut,file: file, line:line)
         return sut
@@ -122,7 +122,7 @@ class URLSessionHTTPClientTests: XCTestCase {
     }
 
     private func resultValuesFor(data : Data? , response: URLResponse? , error:Error?,file: StaticString = #file, line: UInt = #line) -> (Data?,HTTPURLResponse?){
-      
+
         let result = resultFor(data: data, response: response, error: error,file: file,line: line)
 
         switch result {
@@ -145,7 +145,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         var receivedResult : HttpClientResult!
 
         let exp = expectation(description: "Wait for completion")
-        sut.get(from: anyURL()) { result in
+        sut.get(url: anyURL()) { result in
             receivedResult = result
             exp.fulfill()
         }
