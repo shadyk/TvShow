@@ -7,13 +7,7 @@
 
 import Foundation
 
-//protocol ShowLoader{
-//    func load(completion:((Error) -> Void)?)
-//}
-
-
-
-public final class RemoteShowLoader {
+public final class RemoteShowLoader : ShowLoader {
     private let url : URL
     private let client : HTTPClient
 
@@ -23,10 +17,7 @@ public final class RemoteShowLoader {
         case notFound
     }
 
-    public enum Result : Equatable {
-        case success(Show?)
-        case failure(Error)
-    }
+    public typealias Result = ShowLoaderResult
 
     public init(url:URL, client:HTTPClient) {
         self.url = url
@@ -40,7 +31,7 @@ public final class RemoteShowLoader {
             case let .success(data,response):
                 completion(RemoteShowMapper.map(data: data, response:response))
             case .failure:
-                completion(.failure(.connectivity))
+                completion(.failure(RemoteShowLoader.Error.connectivity))
             }
         }
     }

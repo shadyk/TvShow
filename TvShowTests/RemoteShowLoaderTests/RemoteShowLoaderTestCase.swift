@@ -36,7 +36,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
     func test_load_deliversErrorOnClient(){
         let (sut,client) = makeSUT(url: anyURL())
 
-        expect(sut, toCompleteWith: .failure(.connectivity), when: {
+        expect(sut, toCompleteWith: .failure(RemoteShowLoader.Error.connectivity), when: {
             client.complete(with: NSError())
         })
 
@@ -47,7 +47,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
 
         let samples = [199,201,400,500]
         samples.enumerated().forEach{ index,code in
-            expect(sut, toCompleteWith: .failure(.invalidData), when: {
+            expect(sut, toCompleteWith: .failure(RemoteShowLoader.Error.invalidData), when: {
                 let notFoundData = Data("{\"name\":\"Not Found\"}".utf8)
                 client.complete(withStatusCode: code,data:notFoundData, at: index)
             })
@@ -58,7 +58,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
         let (sut,client) = makeSUT(url: anyURL())
 
         expect(sut,
-               toCompleteWith: .failure(.invalidData),
+               toCompleteWith: .failure(RemoteShowLoader.Error.invalidData),
                when: {
                 let invalidJsonData = Data("non json string".utf8)
                 client.complete(withStatusCode: 200, data: invalidJsonData)}
@@ -69,7 +69,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
         let (sut,client) = makeSUT(url: anyURL())
 
         expect(sut,
-               toCompleteWith: .failure(.notFound),
+               toCompleteWith: .failure(RemoteShowLoader.Error.notFound),
                when: {
             let notFoundData = Data("{\"name\":\"Not Found\",\"status\":404, \"code\":0,\"message\":\"not found\"}".utf8)
                 client.complete(withStatusCode: 200, data: notFoundData)
@@ -152,7 +152,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
             case let (.success(receivedItems), .success(expectedItems)):
                 XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
 
-            case let (.failure(receivedError), .failure(expectedError)):
+            case let (.failure(receivedError as RemoteShowLoader.Error), .failure(expectedError as RemoteShowLoader.Error)):
                 XCTAssertEqual(receivedError, expectedError, file: file, line: line)
 
             default:
