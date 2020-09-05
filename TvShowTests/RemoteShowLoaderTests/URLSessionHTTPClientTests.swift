@@ -24,7 +24,9 @@ class URLSessionHTTPClient {
 
 class URLSessionHTTPClientTests: XCTestCase {
 
+
     func test_getFromURL_performsGETrequest(){
+        //BY USING THIS METHOD WE CAN ALSO TEST THE BODY, QUERY PARAMETERS IN THE REQUEST OBSERVER
         URLProtocolStub.startInterceptingRequests()
         let url = URL(string: "http://any-url.com")!
         let exp = expectation(description: "Wait for completion")
