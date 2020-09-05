@@ -6,28 +6,6 @@
 import XCTest
 import TvShows
 
-class URLSessionHTTPClient : HTTPClient {
-    private let session: URLSession
-
-    init(session: URLSession = .shared) {
-        self.session = session
-    }
-    struct UnexpectedValueRepresentaiton : Error {}
-    func get(url: URL, completion: @escaping (HttpClientResult) -> Void) {
-        session.dataTask(with: url) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-            }
-            else if let data = data, let response = response as? HTTPURLResponse{
-                completion(.success(data, response))
-            }
-            else{
-                completion(.failure(UnexpectedValueRepresentaiton()))
-            }
-        }.resume()
-    }
-}
-
 class URLSessionHTTPClientTests: XCTestCase {
 
     override func setUp() {

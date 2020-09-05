@@ -16,6 +16,7 @@
 		E6E06CAD24D3836100C49810 /* RemoteShowLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E06CAC24D3836100C49810 /* RemoteShowLoader.swift */; };
 		E6EB3CCD2503C2FC00A3C112 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EB3CCC2503C2FC00A3C112 /* URLSessionHTTPClientTests.swift */; };
 		E6EB3CD02503CFC100A3C112 /* XCTextCase+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EB3CCF2503CFC100A3C112 /* XCTextCase+Helper.swift */; };
+		E6EB3CD22503F3F700A3C112 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EB3CD12503F3F700A3C112 /* URLSessionHTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		E6E06CAC24D3836100C49810 /* RemoteShowLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteShowLoader.swift; sourceTree = "<group>"; };
 		E6EB3CCC2503C2FC00A3C112 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		E6EB3CCF2503CFC100A3C112 /* XCTextCase+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTextCase+Helper.swift"; sourceTree = "<group>"; };
+		E6EB3CD12503F3F700A3C112 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				E617C70024E979AA00F30ECB /* RemoteShowMapper.swift */,
 				E6E06CAC24D3836100C49810 /* RemoteShowLoader.swift */,
 				E617C6FE24E9796800F30ECB /* HttpClient.swift */,
+				E6EB3CD12503F3F700A3C112 /* URLSessionHTTPClient.swift */,
 			);
 			path = "Show API";
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				E617C6FF24E9796800F30ECB /* HttpClient.swift in Sources */,
 				E6E06CAD24D3836100C49810 /* RemoteShowLoader.swift in Sources */,
 				E617C70124E979AA00F30ECB /* RemoteShowMapper.swift in Sources */,
+				E6EB3CD22503F3F700A3C112 /* URLSessionHTTPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
