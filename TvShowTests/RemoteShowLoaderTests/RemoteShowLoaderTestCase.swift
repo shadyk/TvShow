@@ -167,12 +167,6 @@ class RemoteShowLoaderTestCase: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
 
-    private func trackForMemoryLeak(_ instance:AnyObject,file: StaticString = #file, line: UInt = #line){
-        addTeardownBlock {[weak instance] in
-            XCTAssertNil(instance,"instance Should deallocate after using. Potenial memory leak",file: file,line: line)
-        }
-    }
-
 
     private func makeItem(id: UUID, name: String, language: String,status:String, genres:[String]) -> (model: Show, json: [String: Any]) {
         let item = Show(id: id, name: name, language: language, status: status,genres: genres)

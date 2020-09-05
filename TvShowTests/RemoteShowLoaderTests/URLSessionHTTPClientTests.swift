@@ -32,6 +32,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         super.tearDown()
         URLProtocolStub.stopInterceptingRequests()
     }
+
     func test_getFromURL_performsGETrequest(){
         //BY USING THIS METHOD WE CAN ALSO TEST THE BODY, QUERY PARAMETERS IN THE REQUEST OBSERVER
         let url = URL(string: "http://any-url.com")!
@@ -70,8 +71,10 @@ class URLSessionHTTPClientTests: XCTestCase {
 
     // MARK: - Helpers
 
-    private func makeSUT() -> URLSessionHTTPClient{
-        return URLSessionHTTPClient()
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> URLSessionHTTPClient{
+        let sut = URLSessionHTTPClient()
+        trackForMemoryLeak(sut,file: file, line:line)
+        return sut
     }
 
     private class URLProtocolStub: URLProtocol {
@@ -129,7 +132,4 @@ class URLSessionHTTPClientTests: XCTestCase {
 
         override func stopLoading() {}
     }
-
-
-
 }
