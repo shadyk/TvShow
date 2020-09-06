@@ -41,8 +41,7 @@ final class RemoteShowMapper{
         else if let _ = try? JSONDecoder().decode(ErrorObject.self, from: data){
             return.failure(RemoteShowLoader.Error.notFound)
         }
-        else{
-            return.failure(RemoteShowLoader.Error.invalidData)
-        }
+        return.failure(RemoteShowLoader.Error.invalidData)
+
      }
 }

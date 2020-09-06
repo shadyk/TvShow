@@ -48,8 +48,8 @@ class RemoteShowLoaderTestCase: XCTestCase {
         let samples = [199,201,400,500]
         samples.enumerated().forEach{ index,code in
             expect(sut, toCompleteWith: .failure(RemoteShowLoader.Error.invalidData), when: {
-                let notFoundData = Data("{\"name\":\"Not Found\"}".utf8)
-                client.complete(withStatusCode: code,data:notFoundData, at: index)
+                let anyValidData = Data("{\"name\":\"Any Valid Data\"}".utf8)
+                client.complete(withStatusCode: code,data:anyValidData, at: index)
             })
         }
     }
@@ -71,10 +71,22 @@ class RemoteShowLoaderTestCase: XCTestCase {
         expect(sut,
                toCompleteWith: .failure(RemoteShowLoader.Error.notFound),
                when: {
-            let notFoundData = Data("{\"name\":\"Not Found\",\"status\":404, \"code\":0,\"message\":\"not found\"}".utf8)
+                let notFoundData = Data("{\"name\":\"Not Found\",\"status\":404, \"code\":0,\"message\":\"not found\"}".utf8)
                 client.complete(withStatusCode: 200, data: notFoundData)
         })
     }
+
+    func test_load_completesWithSuccessUnexpctedValidData(){
+        let (sut,client) = makeSUT(url: anyURL())
+
+        expect(sut,
+               toCompleteWith: .failure(RemoteShowLoader.Error.invalidData),
+               when: {
+                let anyUnexpctedData = Data("{\"unexpectedName\":\"Not Found\",\"status\":200, \"code\":0,\"message\":\"not found\"}".utf8)
+                client.complete(withStatusCode: 200, data: anyUnexpctedData)
+        })
+    }
+
 
     func test_load_completesWithSuccessItem(){
         let (sut,client) = makeSUT(url: anyURL())
@@ -85,8 +97,9 @@ class RemoteShowLoaderTestCase: XCTestCase {
                when: {
                 let data = makeItemJSON(item.json)
                 client.complete(withStatusCode: 200, data: data)
-            })
+        })
     }
+    
 
     func test_load_doesntSucceedWhenSUTisDeallocated(){
         //this means if remoteloader became nil and client completes, we should not run the completions i.e. capturedResults
@@ -174,7 +187,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
             "language": language,
             "genres" : genres,
             "status" : status,
-        ].compactMapValues { $0 }
+            ].compactMapValues { $0 }
 
         return (item, json)
     }
