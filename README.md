@@ -21,4 +21,5 @@ The API is from
 `https://rapidapi.com/tvjan/api/tvmaze?endpoint=54514cebe4b06ca1d66ad96e`
 
 
-
+## CI 
+Travis
