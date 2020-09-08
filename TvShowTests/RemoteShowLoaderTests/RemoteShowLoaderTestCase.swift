@@ -90,7 +90,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
 
     func test_load_completesWithSuccessItem(){
         let (sut,client) = makeSUT(url: anyURL())
-        let item = makeItem(id: UUID(), name: "name", language: "english", status: "Ended", genres: ["comedy"])
+        let item = makeItem(id: 123, name: "name", language: "english", status: "Ended", genres: ["comedy"])
 
         expect(sut,
                toCompleteWith: .success(item.model),
@@ -102,7 +102,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
 
     func test_load_completesWithIfItemWithMoreFieldsSuccess(){
         let (sut,client) = makeSUT(url: anyURL())
-        let item = makeItem(id: UUID(), name: "name", language: "english", status: "Ended", genres: ["comedy"])
+        let item = makeItem(id: 123, name: "name", language: "english", status: "Ended", genres: ["comedy"])
         var itemWithMoreFields = item.json
         itemWithMoreFields["newField"] = "Any"
         expect(sut,
@@ -112,7 +112,19 @@ class RemoteShowLoaderTestCase: XCTestCase {
                 client.complete(withStatusCode: 200, data: anyValidShowJsonData)
         })
     }
-    
+
+    func test_load_completesWithSuccessUnexpctedStringId(){
+        let (sut,client) = makeSUT(url: anyURL())
+
+        expect(sut,
+               toCompleteWith: .failure(RemoteShowLoader.Error.invalidData),
+               when: {
+                let anyUnexpctedData = Data("{\"id\":\"123\",\"status\":200, \"code\":0,\"message\":\"not found\"}".utf8)
+                client.complete(withStatusCode: 200, data: anyUnexpctedData)
+        })
+    }
+
+
 
     func test_load_doesntSucceedWhenSUTisDeallocated(){
         //this means if remoteloader became nil and client completes, we should not run the completions i.e. capturedResults
@@ -125,8 +137,9 @@ class RemoteShowLoaderTestCase: XCTestCase {
         client.complete(withStatusCode: 200, data: Data("any data".utf8))
 
         XCTAssertTrue(capturedResults.isEmpty)
-
     }
+
+    
 
 
     //MARK:- helpers
@@ -192,11 +205,11 @@ class RemoteShowLoaderTestCase: XCTestCase {
     }
 
 
-    private func makeItem(id: UUID, name: String, language: String,status:String, genres:[String]) -> (model: Show, json: [String: Any]) {
+    private func makeItem(id: Int, name: String, language: String,status:String, genres:[String]) -> (model: Show, json: [String: Any]) {
         let item = Show(id: id, name: name, language: language, status: status,genres: genres)
 
         let json = [
-            "id": id.uuidString,
+            "id": id,
             "name": name,
             "language": language,
             "genres" : genres,

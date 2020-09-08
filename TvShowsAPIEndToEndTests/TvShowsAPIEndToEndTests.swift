@@ -17,6 +17,7 @@ class TvShowsAPIEndToEndTests: XCTestCase {
         ]
 
         let exp = expectation(description: "Wait for completion")
+        let expectedShow = Show(id: 15779, name: "CBS News Sunday Morning", language: "English", status: "Running",genres: [])
         var receivedResult : ShowLoaderResult?
         let loader = RemoteShowLoader(url: url, headers: headers, client: client)
 
@@ -30,12 +31,27 @@ class TvShowsAPIEndToEndTests: XCTestCase {
         switch receivedResult {
         case let .success(show)?:
             XCTAssertNotNil(show)
+            XCTAssertEqual(show, expectedShow)
         case let .failure(error):
             XCTFail("Expected Success got fail with \(error)")
         default:
             XCTFail("Expected Success got fail")
         }
-
     }
+
+//    func test_load_makeSureJSON(){
+//        let data = Data("".utf8)
+//        let dataFromResponse = try! JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String:Any]
+//        dataFromResponse.forEach{(k,v) in
+//            print("\(k) : \(v)")
+//        }
+//        do {
+//            let remoteTvShow = try JSONDecoder().decode(RemoteTvShow.self, from: data)
+//        }
+//        catch{
+//            print("\(error)")
+//        }
+//    }
+
 
 }

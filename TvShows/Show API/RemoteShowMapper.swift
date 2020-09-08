@@ -19,7 +19,7 @@ final class RemoteShowMapper{
         var code : Int?
 
         var tvShow : Show {
-             return Show(id: "\(self.id)", name: self.name, language: self.language, status:    self.status,genres: self.genres)
+             return Show(id: self.id, name: self.name, language: self.language, status:    self.status,genres: self.genres)
         }
     }
 
@@ -34,17 +34,6 @@ final class RemoteShowMapper{
         guard response.statusCode == 200 else{
             return .failure(RemoteShowLoader.Error.invalidData)
         }
-        let dataFromResponse = try! JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String:Any]
-        dataFromResponse.forEach{(k,v) in
-            print("\(k) : \(v)")
-        }
-        do {
-            let remoteTvShow = try JSONDecoder().decode(RemoteTvShow.self, from: data)
-        }
-        catch{
-            print("\(error)")
-        }
-
 
         if  let remoteTvShow = try? JSONDecoder().decode(RemoteTvShow.self, from: data) {
             return .success(remoteTvShow.tvShow)
