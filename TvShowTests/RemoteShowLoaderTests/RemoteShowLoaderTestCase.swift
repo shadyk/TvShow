@@ -99,12 +99,25 @@ class RemoteShowLoaderTestCase: XCTestCase {
                 client.complete(withStatusCode: 200, data: data)
         })
     }
+
+    func test_load_completesWithIfItemWithMoreFieldsSuccess(){
+        let (sut,client) = makeSUT(url: anyURL())
+        let item = makeItem(id: UUID(), name: "name", language: "english", status: "Ended", genres: ["comedy"])
+        var itemWithMoreFields = item.json
+        itemWithMoreFields["newField"] = "Any"
+        expect(sut,
+               toCompleteWith: .success(item.model),
+               when: {
+                let anyValidShowJsonData = makeItemJSON(itemWithMoreFields)
+                client.complete(withStatusCode: 200, data: anyValidShowJsonData)
+        })
+    }
     
 
     func test_load_doesntSucceedWhenSUTisDeallocated(){
         //this means if remoteloader became nil and client completes, we should not run the completions i.e. capturedResults
         let client = HTTPClientSpy()
-        var sut :RemoteShowLoader? = RemoteShowLoader(url: anyURL(), client:client )
+        var sut :RemoteShowLoader? = RemoteShowLoader(url: anyURL(), headers: nil, client:client )
         var capturedResults = [RemoteShowLoader.Result]()
 
         sut?.load { capturedResults.append($0) }
@@ -122,7 +135,7 @@ class RemoteShowLoaderTestCase: XCTestCase {
     private func makeSUT(url:URL,file: StaticString = #file, line: UInt = #line) -> (RemoteShowLoader, HTTPClientSpy) {
 
         let client = HTTPClientSpy()
-        let sut = RemoteShowLoader(url: url, client: client)
+        let sut = RemoteShowLoader(url: url, headers: nil, client: client)
         trackForMemoryLeak(client,file: file,line: line)
         trackForMemoryLeak(sut,file: file,line: line)
         return (sut,client)
@@ -131,12 +144,13 @@ class RemoteShowLoaderTestCase: XCTestCase {
 
     //CLEINT SPY
     private class HTTPClientSpy: HTTPClient{
+
         var messages = [(url:URL,completion: (HttpClientResult) -> Void)]()
         var requestedURLs : [URL]  {
             return messages.map{$0.url}
         }
 
-        func get(url: URL, completion: @escaping (HttpClientResult) -> Void) {
+        func get(url: URL, headers: [String : String]?, completion: @escaping (HttpClientResult) -> Void) {
             messages.append((url:url,completion:completion))
         }
 

@@ -12,13 +12,13 @@ import Foundation
 //}
 
 public struct Show : Equatable{
-    var id : UUID
+    var id : String
     var name: String
     var language: String
     var genres : [String]?
     var status : String
 
-    public init(id : UUID,name: String, language: String, status: String, genres : [String]? = nil){
+    public init(id : String,name: String, language: String, status: String, genres : [String]? = nil){
         self.id = id
         self.name = name
         self.language = language
