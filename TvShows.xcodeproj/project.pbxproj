@@ -107,6 +107,7 @@
 		E6AB969924CE072400A41714 = {
 			isa = PBXGroup;
 			children = (
+				E6042182250849F20063FFE6 /* README.md */,
 				E6AB96A524CE072400A41714 /* TvShows */,
 				E6AB96A724CE072400A41714 /* Info.plist */,
 				E6AB96B024CE072400A41714 /* TvShowTests */,
@@ -129,7 +130,6 @@
 			children = (
 				E617C70324E994D700F30ECB /* Show Feature */,
 				E6E06CAB24D3834C00C49810 /* Show API */,
-				E6042182250849F20063FFE6 /* README.md */,
 			);
 			path = TvShows;
 			sourceTree = "<group>";
