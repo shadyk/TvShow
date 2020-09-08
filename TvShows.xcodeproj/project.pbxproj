@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E604217F250838660063FFE6 /* XCTextCase+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EB3CCF2503CFC100A3C112 /* XCTextCase+Helper.swift */; };
 		E617C6FF24E9796800F30ECB /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E617C6FE24E9796800F30ECB /* HttpClient.swift */; };
 		E617C70124E979AA00F30ECB /* RemoteShowMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E617C70024E979AA00F30ECB /* RemoteShowMapper.swift */; };
 		E61D9E3024E9E77600A29695 /* ShowLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61D9E2F24E9E77600A29695 /* ShowLoader.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E6042180250839920063FFE6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E617C6FE24E9796800F30ECB /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		E617C70024E979AA00F30ECB /* RemoteShowMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteShowMapper.swift; sourceTree = "<group>"; };
 		E61D9E2F24E9E77600A29695 /* ShowLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLoader.swift; sourceTree = "<group>"; };
@@ -54,7 +56,6 @@
 		E6EB3CD12503F3F700A3C112 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		E6EB3CD72505971800A3C112 /* TvShowsAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TvShowsAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6EB3CD92505971800A3C112 /* TvShowsAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShowsAPIEndToEndTests.swift; sourceTree = "<group>"; };
-		E6EB3CDB2505971800A3C112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +88,6 @@
 		E617C70224E9941B00F30ECB /* RemoteShowLoaderTests */ = {
 			isa = PBXGroup;
 			children = (
-				E6EB3CCE2503CFA100A3C112 /* Helper */,
 				E6AB96BF24CE110600A41714 /* RemoteShowLoaderTestCase.swift */,
 				E6EB3CCC2503C2FC00A3C112 /* URLSessionHTTPClientTests.swift */,
 			);
@@ -109,7 +109,6 @@
 				E6AB96A524CE072400A41714 /* TvShows */,
 				E6AB96A724CE072400A41714 /* Info.plist */,
 				E6AB96B024CE072400A41714 /* TvShowTests */,
-				E6EB3CD82505971800A3C112 /* TvShowsAPIEndToEndTests */,
 				E6AB96A424CE072400A41714 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -136,8 +135,10 @@
 		E6AB96B024CE072400A41714 /* TvShowTests */ = {
 			isa = PBXGroup;
 			children = (
+				E6EB3CCE2503CFA100A3C112 /* Helper */,
 				E6AB96B324CE072400A41714 /* Info.plist */,
 				E617C70224E9941B00F30ECB /* RemoteShowLoaderTests */,
+				E6EB3CD82505971800A3C112 /* TvShowsAPIEndToEndTests */,
 			);
 			path = TvShowTests;
 			sourceTree = "<group>";
@@ -165,7 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				E6EB3CD92505971800A3C112 /* TvShowsAPIEndToEndTests.swift */,
-				E6EB3CDB2505971800A3C112 /* Info.plist */,
+				E6042180250839920063FFE6 /* Info.plist */,
 			);
 			path = TvShowsAPIEndToEndTests;
 			sourceTree = "<group>";
@@ -332,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6EB3CDA2505971800A3C112 /* TvShowsAPIEndToEndTests.swift in Sources */,
+				E604217F250838660063FFE6 /* XCTextCase+Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,7 +573,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = TvShowsAPIEndToEndTests/Info.plist;
+				INFOPLIST_FILE = /Users/shadyk/Desktop/_iOS_Projects/TvShow/TvShowTests/TvShowsAPIEndToEndTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -588,7 +590,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = TvShowsAPIEndToEndTests/Info.plist;
+				INFOPLIST_FILE = /Users/shadyk/Desktop/_iOS_Projects/TvShow/TvShowTests/TvShowsAPIEndToEndTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

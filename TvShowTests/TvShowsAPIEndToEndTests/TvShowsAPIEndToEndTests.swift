@@ -21,6 +21,9 @@ class TvShowsAPIEndToEndTests: XCTestCase {
         var receivedResult : ShowLoaderResult?
         let loader = RemoteShowLoader(url: url, headers: headers, client: client)
 
+        trackForMemoryLeak(client)
+        trackForMemoryLeak(loader)
+
         loader.load { (result) in
             receivedResult = result
             exp.fulfill()
