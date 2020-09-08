@@ -41,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		E6042180250839920063FFE6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6042182250849F20063FFE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E617C6FE24E9796800F30ECB /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		E617C70024E979AA00F30ECB /* RemoteShowMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteShowMapper.swift; sourceTree = "<group>"; };
 		E61D9E2F24E9E77600A29695 /* ShowLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLoader.swift; sourceTree = "<group>"; };
@@ -128,6 +129,7 @@
 			children = (
 				E617C70324E994D700F30ECB /* Show Feature */,
 				E6E06CAB24D3834C00C49810 /* Show API */,
+				E6042182250849F20063FFE6 /* README.md */,
 			);
 			path = TvShows;
 			sourceTree = "<group>";
