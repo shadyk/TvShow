@@ -137,8 +137,8 @@
 		E6AB96B024CE072400A41714 /* TvShowTests */ = {
 			isa = PBXGroup;
 			children = (
-				E6EB3CCE2503CFA100A3C112 /* Helper */,
 				E6AB96B324CE072400A41714 /* Info.plist */,
+				E6EB3CCE2503CFA100A3C112 /* Helper */,
 				E617C70224E9941B00F30ECB /* RemoteShowLoaderTests */,
 				E6EB3CD82505971800A3C112 /* TvShowsAPIEndToEndTests */,
 			);
