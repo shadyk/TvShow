@@ -26,7 +26,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             XCTAssertEqual(request.httpMethod, "GET")
             exp.fulfill()
         }
-        makeSUT().get(url: url, headers: nil, completion: {_ in })
+        makeSUT().get(url: url, headers: nil) {_ in }
         waitForExpectations(timeout: 0.1)
     }
 
@@ -36,7 +36,6 @@ class URLSessionHTTPClientTests: XCTestCase {
         let receivedError = resultErrorFor(data: nil, response: nil, error: requestError)
 
         XCTAssertEqual(receivedError as NSError?, requestError)
-
     }
 
     // TESTING THE INVALID DATA THAT CAN OCCUR (data?, response?, error?)
@@ -116,7 +115,6 @@ class URLSessionHTTPClientTests: XCTestCase {
 
     private func resultFor(data : Data? , response: URLResponse? , error:Error?,file: StaticString = #file, line: UInt = #line) -> HttpClientResult{
 
-
         URLProtocolStub.stub(data: data, response: response, error: error)
 
         let sut = makeSUT(file:file,line:line)
@@ -161,7 +159,6 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
 
         override class func canInit(with request: URLRequest) -> Bool {
-            requestObserver?(request)
             return true
         }
 
@@ -174,6 +171,11 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
 
         override func startLoading() {
+            if let requestObserver = URLProtocolStub.requestObserver{
+                client?.urlProtocolDidFinishLoading(self )
+                return requestObserver(request)
+
+            }
             if let data = URLProtocolStub.stub?.data {
                 client?.urlProtocol(self, didLoad: data)
             }

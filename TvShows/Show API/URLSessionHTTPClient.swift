@@ -37,40 +37,40 @@ public class URLSessionHTTPClient : HTTPClient {
 }
 
 
-class CustomUrlSessionDelegate : NSObject, URLSessionDelegate{
-
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-                   // First load our extra root-CAs to be trusted from the app bundle.
-                   let trust = challenge.protectionSpace.serverTrust
-
-                   let rootCa = "fullchain"
-                   if let rootCaPath = Bundle.main.path(forResource: rootCa, ofType: "pem") {
-                       if let rootCaData = NSData(contentsOfFile: rootCaPath) {
-
-                           let rootCert = SecCertificateCreateWithData(nil, rootCaData)!
-
-                           SecTrustSetAnchorCertificates(trust!, [rootCert] as CFArray)
-
-                           SecTrustSetAnchorCertificatesOnly(trust!, false)
-                       }
-                   }
-            var cferror : CFError!
-            let trustResult = SecTrustEvaluateWithError(trust!, &cferror)
-
-                   if (trustResult) {
-                       // Trust certificate.
-
-                       let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
-                       challenge.sender?.use(credential, for: challenge)
-
-                   } else {
-                       NSLog("Invalid server certificate.")
-                       challenge.sender?.cancel(challenge)
-                   }
-               } else {
-                   NSLog("Got unexpected authentication method \(challenge.protectionSpace.authenticationMethod)");
-                   challenge.sender?.cancel(challenge)
-               }
-           }
-}
+//class CustomUrlSessionDelegate : NSObject, URLSessionDelegate{
+//
+//    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+//        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+//                   // First load our extra root-CAs to be trusted from the app bundle.
+//                   let trust = challenge.protectionSpace.serverTrust
+//
+//                   let rootCa = "fullchain"
+//                   if let rootCaPath = Bundle.main.path(forResource: rootCa, ofType: "pem") {
+//                       if let rootCaData = NSData(contentsOfFile: rootCaPath) {
+//
+//                           let rootCert = SecCertificateCreateWithData(nil, rootCaData)!
+//
+//                           SecTrustSetAnchorCertificates(trust!, [rootCert] as CFArray)
+//
+//                           SecTrustSetAnchorCertificatesOnly(trust!, false)
+//                       }
+//                   }
+//            var cferror : CFError!
+//            let trustResult = SecTrustEvaluateWithError(trust!, &cferror)
+//
+//                   if (trustResult) {
+//                       // Trust certificate.
+//
+//                       let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+//                       challenge.sender?.use(credential, for: challenge)
+//
+//                   } else {
+//                       NSLog("Invalid server certificate.")
+//                       challenge.sender?.cancel(challenge)
+//                   }
+//               } else {
+//                   NSLog("Got unexpected authentication method \(challenge.protectionSpace.authenticationMethod)");
+//                   challenge.sender?.cancel(challenge)
+//               }
+//           }
+//}
