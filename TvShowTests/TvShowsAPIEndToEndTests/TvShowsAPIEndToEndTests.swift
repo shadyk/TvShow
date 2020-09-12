@@ -10,7 +10,7 @@ class TvShowsAPIEndToEndTests: XCTestCase {
 
     func test_endToEndTestServerGET_matchesFixedAccountData(){
         let url  = URL(string: "https://tvjan-tvmaze-v1.p.rapidapi.com/shows/15779")!
-        let client = URLSessionHTTPClient()
+        let client = URLSessionHTTPClient(session:URLSession(configuration: .ephemeral))
         let headers = [
             "x-rapidapi-host": "tvjan-tvmaze-v1.p.rapidapi.com",
             "x-rapidapi-key": "d3700121f3mshf6b090f2b27b01dp18d7a9jsn239b336ab56a"
